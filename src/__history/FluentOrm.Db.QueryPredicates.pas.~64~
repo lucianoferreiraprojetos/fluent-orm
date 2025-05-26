@@ -1,0 +1,297 @@
+unit FluentOrm.Db.QueryPredicates;
+
+interface
+
+type
+
+  IOrderSQL = interface
+    ['{5B7472AA-7C13-4E50-8E03-D7CD6130396C}']
+    function Parse: String;
+  end;
+
+  OrderSQL = class(TInterfacedObject,IOrderSQL)
+  private
+    FOrder: String;
+  public
+    function Parse: String;
+  public
+    class function Get(const AColumnName: String): IOrderSQL;
+  end;
+
+  IPredSQL = interface
+    ['{A7B77194-E103-46D2-BAA2-55CB320C7DAE}']
+    function GetExpression: String;
+
+    function _Get(const AColumnName: String): IPredSQL;
+    function _Or(APredicate: IPredSQL): IPredSQL; overload;
+    function _Or(): IPredSQL; overload;
+    function _And(APredicate: IPredSQL): IPredSQL;
+    function _Inner(APredicate: IPredSQL): IPredSQL;
+    function _Outer(APredicate: IPredSQL): IPredSQL; overload;
+    function _Outer(): IPredSQL; overload;
+
+    function Like(const AOperator: String): IPredSQL;
+    function LikeStart(const AOperator: String): IPredSQL;
+    function LikeEnd(const AOperator: String): IPredSQL;
+    function LikeContain(const AOperator: String): IPredSQL;
+
+    function &In(const AArgsOperator: array of Variant): IPredSQL;
+
+    function Eq(const AOperator: Variant): IPredSQL;
+    function NotEq(const AOperator: Variant): IPredSQL;
+
+
+    function GreaterThanOrEqual(const AOperator: Variant): IPredSQL;
+    function GtOrEqual(const AOperator: Variant): IPredSQL;
+    function GtEq(const AOperator: Variant): IPredSQL;
+    function GreaterThan(const AOperator: Variant): IPredSQL;
+
+    function Gt(const AOperator: Variant): IPredSQL;
+
+    function LessThanOrEqual(const AOperator: Variant): IPredSQL;
+    function LtOrEqual(const AOperator: Variant): IPredSQL;
+    function LtEq(const AOperator: Variant): IPredSQL;
+
+    function LessThan(const AOperator: Variant): IPredSQL;
+  end;
+
+  PredSQL = class(TInterfacedObject,IPredSQL)
+  private
+    FExpression: String;
+    constructor Create(const AExpression: String);
+    procedure SetAddExpression(const AOperator: String);
+    property AddExpression: String write SetAddExpression;
+  public
+    function GetExpression: String;
+  public
+    function _Get(const AColumnName: String): IPredSQL;
+    function _Or(APredicate: IPredSQL): IPredSQL; overload;
+    function _Or(): IPredSQL; overload;
+    function _And(APredicate: IPredSQL): IPredSQL;
+    function _Inner(APredicate: IPredSQL): IPredSQL;
+    function _Outer(APredicate: IPredSQL): IPredSQL; overload;
+    function _Outer(): IPredSQL; overload;
+  public
+    function &In(const AArgsOperator: array of Variant): IPredSQL;
+    function Like(const AOperator: String): IPredSQL;
+    function LikeStart(const AOperator: String): IPredSQL;
+    function LikeEnd(const AOperator: String): IPredSQL;
+    function LikeContain(const AOperator: String): IPredSQL;
+    function Eq(const AOperator: Variant): IPredSQL;
+    function NotEq(const AOperator: Variant): IPredSQL;
+    function GreaterThanOrEqual(const AOperator: Variant): IPredSQL;
+    function GtOrEqual(const AOperator: Variant): IPredSQL;
+    function GtEq(const AOperator: Variant): IPredSQL;
+    function GreaterThan(const AOperator: Variant): IPredSQL;
+    function Gt(const AOperator: Variant): IPredSQL;
+    function LessThanOrEqual(const AOperator: Variant): IPredSQL;
+    function LtOrEqual(const AOperator: Variant): IPredSQL;
+    function LtEq(const AOperator: Variant): IPredSQL;
+    function LessThan(const AOperator: Variant): IPredSQL;
+    function Lt(const AOperator: Variant): IPredSQL;
+    function CastToStrVar(const AValue: Variant): Variant;
+  public
+    class function Get(const AColumnName: String): IPredSQL;
+    class function &Or(APredicate1,APredicate2: IPredSQL): IPredSQL;
+  end;
+
+implementation
+
+uses
+  System.Variants, System.SysUtils, System.StrUtils;
+
+{ PredSQL }
+
+class function PredSQL.&Or(APredicate1, APredicate2: IPredSQL): IPredSQL;
+begin
+  Result := Self.Create(APredicate1.GetExpression + ' OR ' + APredicate2.GetExpression);
+end;
+
+function PredSQL.&In(const AArgsOperator: array of Variant): IPredSQL;
+var
+  StrIn: String;
+begin
+  Result := Self;
+
+  for var Item in AArgsOperator do
+    StrIn := StrIn + IfThen(StrIn.IsEmpty,'',',') + CastToStrVar(Item);
+
+  AddExpression := ' IN(' + StrIn + ')';
+end;
+
+function PredSQL.CastToStrVar(const AValue: Variant): Variant;
+var
+  LValue: Variant;
+begin
+  if VarIsStr(AValue) then
+    LValue := QuotedStr(AValue)
+  else
+    LValue := VarToStr(AValue);
+
+  Result := LValue;
+end;
+
+constructor PredSQL.Create(const AExpression: String);
+begin
+  AddExpression := AExpression;
+end;
+
+function PredSQL.Eq(const AOperator: Variant): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := '=' + CastToStrVar(AOperator);
+end;
+
+class function PredSQL.Get(const AColumnName: String): IPredSQL;
+begin
+  Result := Self.Create(AColumnName);
+end;
+
+function PredSQL.GetExpression: String;
+begin
+  Result := FExpression;
+end;
+
+function PredSQL.GreaterThan(const AOperator: Variant): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := '>' + CastToStrVar(AOperator);
+end;
+
+function PredSQL.GreaterThanOrEqual(const AOperator: Variant): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := '>=' + CastToStrVar(AOperator);
+end;
+
+function PredSQL.Gt(const AOperator: Variant): IPredSQL;
+begin
+  Result := GreaterThan(AOperator);
+end;
+
+function PredSQL.GtEq(const AOperator: Variant): IPredSQL;
+begin
+  Result := GreaterThanOrEqual(AOperator);
+end;
+
+function PredSQL.GtOrEqual(const AOperator: Variant): IPredSQL;
+begin
+  Result := GreaterThanOrEqual(AOperator);
+end;
+
+function PredSQL.LessThan(const AOperator: Variant): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := '<' + CastToStrVar(AOperator);
+end;
+
+function PredSQL.LessThanOrEqual(const AOperator: Variant): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := '<=' + CastToStrVar(AOperator);
+end;
+
+function PredSQL.Like(const AOperator: String): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' LIKE ' + QuotedStr(AOperator)
+end;
+
+function PredSQL.LikeContain(const AOperator: String): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' LIKE ' + QuotedStr('%' + AOperator + '%')
+end;
+
+function PredSQL.LikeEnd(const AOperator: String): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' LIKE ' + QuotedStr('%' + AOperator)
+end;
+
+function PredSQL.LikeStart(const AOperator: String): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' LIKE ' + QuotedStr(AOperator + '%')
+end;
+
+function PredSQL.Lt(const AOperator: Variant): IPredSQL;
+begin
+  Result := LessThan(AOperator);
+end;
+
+function PredSQL.LtEq(const AOperator: Variant): IPredSQL;
+begin
+  Result := LessThanOrEqual(AOperator);
+end;
+
+function PredSQL.LtOrEqual(const AOperator: Variant): IPredSQL;
+begin
+  Result := LessThanOrEqual(AOperator);
+end;
+
+function PredSQL.NotEq(const AOperator: Variant): IPredSQL;
+begin
+  Result := Self;
+  FExpression := ' NOT ' + FExpression + '=' + CastToStrVar(AOperator);
+end;
+
+procedure PredSQL.SetAddExpression(const AOperator: String);
+begin
+  FExpression := FExpression + AOperator;
+end;
+
+function PredSQL._And(APredicate: IPredSQL): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' AND ' + APredicate.GetExpression;
+end;
+
+function PredSQL._Get(const AColumnName: String): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' ' + AColumnName;
+end;
+
+function PredSQL._Inner(APredicate: IPredSQL): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' (' + APredicate.GetExpression + ')';
+end;
+
+function PredSQL._Or(APredicate: IPredSQL): IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' OR (' + APredicate.GetExpression + ')';
+end;
+
+function PredSQL._Or: IPredSQL;
+begin
+  Result := Self;
+  AddExpression := ' OR';
+end;
+
+function PredSQL._Outer: IPredSQL;
+begin
+  Result := Self;
+  FExpression := '(' + FExpression + ')';
+end;
+
+function PredSQL._Outer(APredicate: IPredSQL): IPredSQL;
+begin
+  Result := Self;
+  FExpression := '(' + FExpression + ') ' + APredicate.GetExpression;
+end;
+
+{ OrderSQL }
+
+class function OrderSQL.Get(const AColumnName: String): IOrderSQL;
+begin
+end;
+
+function OrderSQL.Parse: String;
+begin
+  Result := FOrder;
+end;
+
+end.

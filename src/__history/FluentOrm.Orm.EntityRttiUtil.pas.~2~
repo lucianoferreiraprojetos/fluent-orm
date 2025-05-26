@@ -1,0 +1,26 @@
+unit FluentOrm.Orm.EntityRttiUtil;
+
+interface
+
+type
+  TEntityRttiUtil = class
+  public
+    class function GetTableName(AClazz: TClass): String;
+    class function GetSequenceName(AClazz: TClass): String;
+  end;
+
+implementation
+
+{ TEntityRttiUtil }
+
+class function TEntityRttiUtil.GetSequenceName(AClazz: TClass): String;
+begin
+//
+end;
+
+class function TEntityRttiUtil.GetTableName(AClazz: TClass): String;
+begin
+//
+end;
+
+end.

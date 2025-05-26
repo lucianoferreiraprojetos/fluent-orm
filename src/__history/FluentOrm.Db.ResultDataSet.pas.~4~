@@ -1,0 +1,102 @@
+unit FluentOrm.Db.ResultDataSet;
+
+interface
+
+uses
+  System.Classes, Data.DB;
+
+type
+
+  TProcForEach = reference to procedure(const AFields: TFields);
+
+  IResultDataSet = interface
+    ['{9A26CB0D-3F6E-4DD5-B426-FDF567D62790}']
+    function ForEach(AProcForEach: TProcForEach): IResultDataSet;
+    function First: IResultDataSet;
+    function Last: IResultDataSet;
+    function Next: IResultDataSet;
+    function FieldByName(const AFieldName: String): TField;
+    function GetSingleResult(AObjectType: TClass; const MappedByConstruct: Boolean = False): TObject;
+    function GetDataSet: TDataSet;
+    function IsEmpty: Boolean;
+  end;
+
+  TResultDataSet = class(TInterfacedObject,IResultDataSet)
+  private
+    FDataSet: TDataSet;
+    constructor Create(ADataSet: TDataSet);
+  public
+    function ForEach(AProcForEach: TProcForEach): IResultDataSet;
+    function First: IResultDataSet;
+    function Last: IResultDataSet;
+    function Next: IResultDataSet;
+    function FieldByName(const AFieldName: String): TField;
+    function GetSingleResult(AObjectType: TClass; const MappedByConstruct: Boolean = False): TObject;
+    function GetDataSet: TDataSet;
+    function IsEmpty: Boolean;
+  public
+    class function New(ADataSet: TDataSet): IResultDataSet;
+  end;
+
+implementation
+
+{ TResultDataSet }
+
+constructor TResultDataSet.Create(ADataSet: TDataSet);
+begin
+  FDataSet := ADataSet;
+end;
+
+function TResultDataSet.FieldByName(const AFieldName: String): TField;
+begin
+  Result := FDataSet.FieldByName(AFieldName);
+end;
+
+function TResultDataSet.First: IResultDataSet;
+begin
+  FDataSet.First;
+end;
+
+function TResultDataSet.ForEach(AProcForEach: TProcForEach): IResultDataSet;
+begin
+  FDataSet.First;
+  while not FDataSet.Eof do
+  begin
+    if Assigned(AProcForEach) then
+      AProcForEach(FDataSet.Fields);
+    FDataSet.Next;
+  end;
+end;
+
+function TResultDataSet.GetDataSet: TDataSet;
+begin
+  Result := FDataSet;
+end;
+
+function TResultDataSet.GetSingleResult(AObjectType: TClass;
+  const MappedByConstruct: Boolean = False): TObject;
+begin
+//
+end;
+
+function TResultDataSet.IsEmpty: Boolean;
+begin
+  Result := FDataSet.IsEmpty;
+end;
+
+function TResultDataSet.Last: IResultDataSet;
+begin
+  FDataSet.Last;
+end;
+
+class function TResultDataSet.New(ADataSet: TDataSet): IResultDataSet;
+begin
+  Result := Self.Create(ADataSet);
+end;
+
+function TResultDataSet.Next: IResultDataSet;
+begin
+  FDataSet.Next;
+end;
+
+end.

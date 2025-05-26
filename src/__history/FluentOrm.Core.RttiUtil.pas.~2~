@@ -1,0 +1,12 @@
+unit FluentOrm.Core.RttiUtil;
+
+interface
+
+type
+
+  TRttiUtil = class
+  end;
+
+implementation
+
+end.

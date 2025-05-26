@@ -1,0 +1,7 @@
+unit FluentOrm.Orm.Mappings;
+
+interface
+
+implementation
+
+end.

@@ -1,0 +1,18 @@
+unit uModels;
+
+interface
+
+type
+
+  TUsuario = class
+  private
+    FId: Int64;
+    FNome: String;
+  public
+    property Id: Int64 read FId write FId;
+    property Nome: String read FNome write FNome;
+  end;
+
+implementation
+
+end.

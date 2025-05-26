@@ -1,0 +1,190 @@
+unit FluentOrm.Db.QueryBuilder;
+
+interface
+
+uses
+  FluentOrm.Db.ResultDataSet, FluentOrm.Db.DbConnection, System.Classes,
+  FluentOrm.Db.QuerySql, FluentOrm.Db.QueryPredicates;
+
+type
+
+  IPredSQL = FluentOrm.Db.QueryPredicates.IPredSQL;
+  PredSQL = FluentOrm.Db.QueryPredicates.PredSQL;
+
+  TJoinType = (JoinLeft,JoinRight,JoinInner);
+
+  IQueryBuilder = interface
+    ['{B4BF6FDF-6438-4DB2-ACD1-8E71DF1410E5}']
+    function From(const ATableName: String; const AAlias: String = ''): IQueryBuilder;
+    function Join(const AJoinTableName, AAlias, AOn: String;
+      AJoinType: TJoinType = TJoinType.JoinLeft): IQueryBuilder;
+    function Where(const ASQLWhere: String): IQueryBuilder; overload;
+    function Where(APredicate: IPredSQL): IQueryBuilder; overload;
+    function WhereEq(const AOperand: String; const AOperator: Variant): IQueryBuilder;
+    function OrderBy(const AColumns: String): IQueryBuilder;
+    function Select(const AColumns: String): IQueryBuilder;
+    function SelectAll(): IQueryBuilder;
+    function GetResultDataSet: IResultDataSet;
+  end;
+
+  TQueryBuilder = class(TInterfacedObject,IQueryBuilder)
+  private
+    FDbConnection: TDbConnection;
+    FTableName: String;
+    FSelectList: TStringList;
+    FWhereList: TStringList;
+    FOrderByList: TStringList;
+    constructor Create(ADbConnection: TDbConnection);
+    destructor Destroy; override;
+    function GetSelectConcat: String;
+    function GetWhereConcat: String;
+    function GetOrderByConcat: String;
+  public
+    function From(const ATableName: String; const AAlias: String = ''): IQueryBuilder;
+    function Join(const AJoinTableName, AAlias, AOn: String;
+      AJoinType: TJoinType = TJoinType.JoinLeft): IQueryBuilder;
+    function Where(const ASQLWhere: String): IQueryBuilder; overload;
+    function Where(APredicate: IPredSQL): IQueryBuilder; overload;
+    function WhereEq(const AOperand: String; const AOperator: Variant): IQueryBuilder;
+    function OrderBy(const AColumns: String): IQueryBuilder;
+    function Select(const AColumns: String): IQueryBuilder;
+    function SelectAll(): IQueryBuilder;
+    function GetResultDataSet: IResultDataSet;
+  public
+    class function New(ADbConnection: TDbConnection): IQueryBuilder;
+  end;
+
+implementation
+
+uses
+  System.SysUtils, System.StrUtils, System.Variants;
+
+{ TQueryBuilder }
+
+constructor TQueryBuilder.Create(ADbConnection: TDbConnection);
+begin
+  FDbConnection := ADbConnection;
+  FWhereList := TStringList.Create;
+  FSelectList := TStringList.Create;
+  FOrderByList := TStringList.Create;
+end;
+
+destructor TQueryBuilder.Destroy;
+begin
+  FreeAndNil(FWhereList);
+  FreeAndNil(FSelectList);
+  FreeAndNil(FOrderByList);
+  inherited;
+end;
+
+function TQueryBuilder.From(const ATableName, AAlias: String): IQueryBuilder;
+begin
+  Result := Self;
+  FTableName := ATableName;
+end;
+
+function TQueryBuilder.GetOrderByConcat: String;
+begin
+  for var Str in FOrderByList do
+    Result := Concat(Result,Str);
+end;
+
+function TQueryBuilder.GetResultDataSet: IResultDataSet;
+var
+  Select: String;
+  Where: String;
+  OrderBy: String;
+  Qry: IQuerySql;
+begin
+  Where := GetWhereConcat;
+  Select := GetSelectConcat;
+  OrderBy := GetOrderByConcat;
+
+  Qry := TQuerySql.New(FDbConnection)
+    .AddSQL('SELECT ' + Select)
+    .AddSQL('FROM ' + FTableName);
+
+  if not Where.IsEmpty then
+    Qry.AddSQL('WHERE ' + Where);
+
+  if not OrderBy.IsEmpty then
+    Qry.AddSQL('ORDER BY ' + OrderBy);
+
+  Result := Qry.GetResultDataSet;
+end;
+
+function TQueryBuilder.GetSelectConcat: String;
+begin
+  if FSelectList.Count = 0 then
+    SelectAll;
+
+  for var Str in FSelectList do
+    Result := Concat(Result,Str);
+end;
+
+function TQueryBuilder.GetWhereConcat: String;
+begin
+  if FWhereList.Count = 1 then
+    Result :=  FWhereList[0]
+  else
+  begin
+    for var Str in FWhereList do
+      Result := Result + IfThen(Result.IsEmpty,'',' AND ') + '(' + Str + ')';
+  end
+end;
+
+function TQueryBuilder.Join(const AJoinTableName, AAlias, AOn: String;
+  AJoinType: TJoinType): IQueryBuilder;
+begin
+//
+end;
+
+class function TQueryBuilder.New(ADbConnection: TDbConnection): IQueryBuilder;
+begin
+  Result := Self.Create(ADbConnection);
+end;
+
+function TQueryBuilder.OrderBy(const AColumns: String): IQueryBuilder;
+begin
+  Result := Self;
+  FOrderByList.Add(AColumns);
+end;
+
+function TQueryBuilder.Select(const AColumns: String): IQueryBuilder;
+begin
+  Result := Self;
+  FSelectList.Add(AColumns);
+end;
+
+function TQueryBuilder.SelectAll: IQueryBuilder;
+begin
+  Result := Self;
+  FSelectList.Clear;
+  FSelectList.Add('*');
+end;
+
+function TQueryBuilder.Where(const ASQLWhere: String): IQueryBuilder;
+begin
+  Result := Self;
+  FWhereList.Add(ASQLWhere);
+end;
+
+function TQueryBuilder.Where(APredicate: IPredSQL): IQueryBuilder;
+begin
+  Result := Where(APredicate.GetExpression);
+end;
+
+function TQueryBuilder.WhereEq(const AOperand: String;
+  const AOperator: Variant): IQueryBuilder;
+var
+  LOperator: Variant;
+begin
+  if VarIsStr(AOperator) then
+    LOperator := QuotedStr(AOperator)
+  else
+    LOperator := VarToStr(AOperator);
+
+  Result := Where(AOperand + '=' + LOperator);
+end;
+
+end.

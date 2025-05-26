@@ -1,0 +1,46 @@
+unit FluentOrm.Db.DbResultSet;
+
+interface
+
+uses
+  System.Classes, Data.DB;
+
+type
+
+  TProcForEach = reference to procedure(const AFields: TFields);
+
+  IDbResultSet = interface
+    ['{A1FB9A28-AD1F-4B30-8628-78D223D3D205}']
+    function ForEach(AProcForEach: TProcForEach): IDbResultSet;
+  end;
+
+  TDbResultSet = class(TInterfacedObject,IDbResultSet)
+  private
+    FDataSet: TDataSet;
+    constructor Create(ADataSet: TDataSet);
+  public
+    function ForEach(AProcForEach: TProcForEach): IDbResultSet;
+  public
+    class function New(ADataSet: TDataSet): IDbResultSet;
+  end;
+
+implementation
+
+{ TDbResultSet }
+
+constructor TDbResultSet.Create(ADataSet: TDataSet);
+begin
+  FDataSet := ADataSet;
+end;
+
+function TDbResultSet.ForEach(AProcForEach: TProcForEach): IDbResultSet;
+begin
+//
+end;
+
+class function TDbResultSet.New(ADataSet: TDataSet): IDbResultSet;
+begin
+  Result := Self.Create(ADataSet);
+end;
+
+end.

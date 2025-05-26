@@ -1,0 +1,42 @@
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,
+  FluentOrm.Db.DbSql, FluentOrm.Db.DbResultSet, FluentOrm.Db.QueryBuilder;
+
+type
+  TForm2 = class(TForm)
+    BitBtn1: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+uses
+  Data.DB;
+
+{$R *.dfm}
+
+procedure TForm2.BitBtn1Click(Sender: TObject);
+var
+  Drs: IDbResultSet;
+begin
+
+  TQueryBuilder.New(nil)
+    .From('USUARIO','U')
+    .OrderBy('NOME')
+    .GetResultSet.GetSingleResult(TForm2);
+
+end;
+
+end.

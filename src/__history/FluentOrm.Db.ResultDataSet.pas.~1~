@@ -1,0 +1,88 @@
+unit FluentOrm.Db.ResultDataSet;
+
+interface
+
+uses
+  System.Classes, Data.DB;
+
+type
+
+  TProcForEach = reference to procedure(const AFields: TFields);
+
+  IDbResultSet = interface
+    ['{9A26CB0D-3F6E-4DD5-B426-FDF567D62790}']
+    function ForEach(AProcForEach: TProcForEach): IDbResultSet;
+    function First: IDbResultSet;
+    function Last: IDbResultSet;
+    function Next: IDbResultSet;
+    function FieldByName(const AFieldName: String): TField;
+    function GetSingleResult(AObjectType: TClass; const MappedByConstruct: Boolean = False): TObject;
+  end;
+
+  TDbResultSet = class(TInterfacedObject,IDbResultSet)
+  private
+    FDataSet: TDataSet;
+    constructor Create(ADataSet: TDataSet);
+  public
+    function ForEach(AProcForEach: TProcForEach): IDbResultSet;
+    function First: IDbResultSet;
+    function Last: IDbResultSet;
+    function Next: IDbResultSet;
+    function FieldByName(const AFieldName: String): TField;
+    function GetSingleResult(AObjectType: TClass; const MappedByConstruct: Boolean = False): TObject;
+  public
+    class function New(ADataSet: TDataSet): IDbResultSet;
+  end;
+
+implementation
+
+{ TDbResultSet }
+
+constructor TDbResultSet.Create(ADataSet: TDataSet);
+begin
+  FDataSet := ADataSet;
+end;
+
+function TDbResultSet.FieldByName(const AFieldName: String): TField;
+begin
+  Result := FDataSet.FieldByName(AFieldName);
+end;
+
+function TDbResultSet.First: IDbResultSet;
+begin
+  FDataSet.First;
+end;
+
+function TDbResultSet.ForEach(AProcForEach: TProcForEach): IDbResultSet;
+begin
+  FDataSet.First;
+  while not FDataSet.Eof do
+  begin
+    if Assigned(AProcForEach) then
+      AProcForEach(FDataSet.Fields);
+    FDataSet.Next;
+  end;
+end;
+
+function TDbResultSet.GetSingleResult(AObjectType: TClass;
+  const MappedByConstruct: Boolean = False): TObject;
+begin
+//
+end;
+
+function TDbResultSet.Last: IDbResultSet;
+begin
+  FDataSet.Last;
+end;
+
+class function TDbResultSet.New(ADataSet: TDataSet): IDbResultSet;
+begin
+  Result := Self.Create(ADataSet);
+end;
+
+function TDbResultSet.Next: IDbResultSet;
+begin
+  FDataSet.Next;
+end;
+
+end.

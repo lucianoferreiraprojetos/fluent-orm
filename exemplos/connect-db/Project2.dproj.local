@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/05/26 09:55:51.000.391,=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2025/05/26 09:56:30.000.216,C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit2.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit2.pas</Transaction>
+    <Transaction>2025/05/26 09:56:30.000.216,C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit2.dfm=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit2.dfm</Transaction>
+    <Transaction>2025/05/26 09:56:32.000.840,C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Project2.dproj=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Project2.dproj</Transaction>
+    <Transaction>2025/05/26 09:56:40.000.681,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 09:57:15.000.325,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.DbParams.pas</Transaction>
+    <Transaction>2025/05/26 09:57:21.000.031,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 09:57:34.000.503,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.DbConnection.pas</Transaction>
+    <Transaction>2025/05/26 10:04:56.000.987,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 10:05:46.000.562,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.DbSql.pas</Transaction>
+    <Transaction>2025/05/26 10:13:40.000.810,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 10:13:50.000.146,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 11:19:20.000.858,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 11:19:39.000.973,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.DbResultSet.pas</Transaction>
+    <Transaction>2025/05/26 11:49:19.178,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 11:49:33.613,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.Query.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 11:49:41.741,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 11:49:57.828,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.QueryBuilder.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:02:47.213,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:03:21.726,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Core.RttiUtil.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:04:15.366,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:04:29.596,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.UpdateBuilder.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:04:47.617,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:05:04.629,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Orm.CriteriaBuilder.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:05:17.230,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:05:39.216,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Orm.Mappings.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:05:48.101,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:06:01.347,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Orm.Types.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:06:14.195,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:06:32.134,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Orm.EntityRttiUtil.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:06:50.293,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:07:04.209,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Orm.CriteriaPredicates.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:08:36.498,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:09:11.299,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Core.RttiCoreUtil.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Core.RttiUtil.pas</Transaction>
+    <Transaction>2025/05/26 12:58:07.241,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:58:17.882,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\uModels.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 12:59:37.099,=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\exemplos\connect-db\Unit1.pas</Transaction>
+    <Transaction>2025/05/26 13:18:42.628,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.QuerySql.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.DbSql.pas</Transaction>
+    <Transaction>2025/05/26 13:22:26.106,C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.ResultDataSet.pas=C:\fontes-projetos\meus-projetos\delphi\fluent-orm\src\FluentOrm.Db.DbResultSet.pas</Transaction>
+  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="..\..\..\fluent-orm"/>
+    <File Path="..\..\src"/>
+    <File Path="..\..\src\FluentOrm.Core.RttiCoreUtil.pas"/>
+    <File Path="..\..\src\FluentOrm.Db.DbConnection.pas"/>
+    <File Path="..\..\src\FluentOrm.Db.DbParams.pas"/>
+    <File Path="..\..\src\FluentOrm.Db.QueryBuilder.pas"/>
+    <File Path="..\..\src\FluentOrm.Db.QuerySql.pas"/>
+    <File Path="..\..\src\FluentOrm.Db.ResultDataSet.pas"/>
+    <File Path="..\..\src\FluentOrm.Db.UpdateBuilder.pas"/>
+    <File Path="..\..\src\FluentOrm.Orm.CriteriaBuilder.pas"/>
+    <File Path="..\..\src\FluentOrm.Orm.CriteriaPredicates.pas"/>
+    <File Path="..\..\src\FluentOrm.Orm.EntityRttiUtil.pas"/>
+    <File Path="..\..\src\FluentOrm.Orm.Mappings.pas"/>
+    <File Path="..\..\src\FluentOrm.Orm.Types.pas"/>
+    <File Path="uModels.pas"/>
+    <File Path="Unit2.pas"/>
+    <File Path="Unit2.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

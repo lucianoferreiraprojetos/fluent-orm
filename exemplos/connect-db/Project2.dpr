@@ -1,0 +1,27 @@
+program Project2;
+
+uses
+  Vcl.Forms,
+  Unit2 in 'Unit2.pas' {Form2},
+  FluentOrm.Db.DbParams in '..\..\src\FluentOrm.Db.DbParams.pas',
+  FluentOrm.Db.DbConnection in '..\..\src\FluentOrm.Db.DbConnection.pas',
+  FluentOrm.Db.QuerySql in '..\..\src\FluentOrm.Db.QuerySql.pas',
+  FluentOrm.Db.ResultDataSet in '..\..\src\FluentOrm.Db.ResultDataSet.pas',
+  FluentOrm.Db.QueryBuilder in '..\..\src\FluentOrm.Db.QueryBuilder.pas',
+  FluentOrm.Core.RttiCoreUtil in '..\..\src\FluentOrm.Core.RttiCoreUtil.pas',
+  FluentOrm.Db.UpdateBuilder in '..\..\src\FluentOrm.Db.UpdateBuilder.pas',
+  FluentOrm.Orm.CriteriaBuilder in '..\..\src\FluentOrm.Orm.CriteriaBuilder.pas',
+  FluentOrm.Orm.Mappings in '..\..\src\FluentOrm.Orm.Mappings.pas',
+  FluentOrm.Orm.Types in '..\..\src\FluentOrm.Orm.Types.pas',
+  FluentOrm.Orm.EntityRttiUtil in '..\..\src\FluentOrm.Orm.EntityRttiUtil.pas',
+  FluentOrm.Orm.CriteriaPredicates in '..\..\src\FluentOrm.Orm.CriteriaPredicates.pas',
+  uModels in 'uModels.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm2, Form2);
+  Application.Run;
+end.

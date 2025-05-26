@@ -1,0 +1,7 @@
+unit FluentOrm.Core.RttiUtil;
+
+interface
+
+implementation
+
+end.

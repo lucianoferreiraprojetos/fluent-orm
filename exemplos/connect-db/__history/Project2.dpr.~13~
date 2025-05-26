@@ -1,0 +1,23 @@
+program Project2;
+
+uses
+  Vcl.Forms,
+  Unit2 in 'Unit2.pas' {Form2},
+  FluentOrm.Db.DbParams in '..\..\src\FluentOrm.Db.DbParams.pas',
+  FluentOrm.Db.DbConnection in '..\..\src\FluentOrm.Db.DbConnection.pas',
+  FluentOrm.Db.DbSql in '..\..\src\FluentOrm.Db.DbSql.pas',
+  FluentOrm.Db.DbResultSet in '..\..\src\FluentOrm.Db.DbResultSet.pas',
+  FluentOrm.Db.QueryBuilder in '..\..\src\FluentOrm.Db.QueryBuilder.pas',
+  FluentOrm.Core.RttiUtil in '..\..\src\FluentOrm.Core.RttiUtil.pas',
+  FluentOrm.Db.UpdateBuilder in '..\..\src\FluentOrm.Db.UpdateBuilder.pas',
+  FluentOrm.Orm.CriteriaBuilder in '..\..\src\FluentOrm.Orm.CriteriaBuilder.pas',
+  FluentOrm.Orm.Mappings in '..\..\src\FluentOrm.Orm.Mappings.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm2, Form2);
+  Application.Run;
+end.

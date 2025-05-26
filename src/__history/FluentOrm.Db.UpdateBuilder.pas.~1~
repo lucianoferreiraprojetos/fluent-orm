@@ -1,0 +1,7 @@
+unit FluentOrm.Db.UpdateBuilder;
+
+interface
+
+implementation
+
+end.

@@ -1,0 +1,59 @@
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,
+  FluentOrm.Db.DbSql, FluentOrm.Db.DbResultSet, FluentOrm.Db.QueryBuilder;
+
+type
+
+  TPerfilUsuario = class
+  private
+    FId: Int64;
+    FNome: String;
+  public
+    property Id: Int64 read FId write FId;
+    property Nome: String read FNome write FNome;
+  end;
+
+  TForm2 = class(TForm)
+    BitBtn1: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+
+uses
+  Data.DB;
+
+{$R *.dfm}
+
+procedure TForm2.BitBtn1Click(Sender: TObject);
+var
+  Drs: IDbResultSet;
+begin
+  var Usuario := TQueryBuilder.New(nil)
+    .From('PERFIL_USUARIO','PU')
+    .OrderBy('NOME')
+    .GetResultSet.GetSingleResult(TPerfilUsuario) as TUsuario;
+
+  TQueryBuilder.New(nil)
+    .From('USUARIO','U')
+    .OrderBy('NOME')
+    .GetResultSet.ForEach(procedure(const AFields: TFields)
+      begin
+
+      end);
+
+end;
+
+end.
