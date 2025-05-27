@@ -20,6 +20,7 @@ type
     function GetDataSet: TDataSet;
     function IsEmpty: Boolean;
     function Eof: Boolean;
+    function Fields: TFields;
   end;
 
   TResultDataSet = class(TInterfacedObject,IResultDataSet)
@@ -36,6 +37,7 @@ type
     function GetDataSet: TDataSet;
     function IsEmpty: Boolean;
     function Eof: Boolean;
+    function Fields: TFields;
   public
     class function New(ADataSet: TDataSet): IResultDataSet;
   end;
@@ -57,6 +59,11 @@ end;
 function TResultDataSet.FieldByName(const AFieldName: String): TField;
 begin
   Result := FDataSet.FieldByName(AFieldName);
+end;
+
+function TResultDataSet.Fields: TFields;
+begin
+  Result := FDataSet.Fields;
 end;
 
 function TResultDataSet.First: IResultDataSet;

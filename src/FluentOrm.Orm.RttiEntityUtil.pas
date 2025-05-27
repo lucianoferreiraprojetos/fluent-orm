@@ -1,4 +1,4 @@
-unit FluentOrm.Orm.EntityRttiUtil;
+unit FluentOrm.Orm.RttiEntityUtil;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   System.Rtti, System.TypInfo, FluentOrm.Orm.Mappings;
 
 type
-  TEntityRttiUtil = class
+  TRttiEntityUtil = class
   public
     class function GetTableName(AClazz: TClass): String;
     class function GetSequenceName(AClazz: TClass): String;
@@ -14,9 +14,9 @@ type
 
 implementation
 
-{ TEntityRttiUtil }
+{ TRttiEntityUtil }
 
-class function TEntityRttiUtil.GetSequenceName(AClazz: TClass): String;
+class function TRttiEntityUtil.GetSequenceName(AClazz: TClass): String;
 var
   rCtx: TRttiContext;
   rTyp: TRttiType;
@@ -35,7 +35,7 @@ begin
   end;
 end;
 
-class function TEntityRttiUtil.GetTableName(AClazz: TClass): String;
+class function TRttiEntityUtil.GetTableName(AClazz: TClass): String;
 var
   rCtx: TRttiContext;
   rTyp: TRttiType;
